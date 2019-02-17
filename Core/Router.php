@@ -1,9 +1,11 @@
 <?php
 
-//namespace Core;
+namespace Core;
 
 /**
  * Router
+ * User: Alexander Korus
+ * Date: 2019-02-17
  */
 class Router
 {
@@ -31,6 +33,7 @@ class Router
 
         $this->routes[$route] = $params;
     }
+
 
     public function getRoutes()
     {
@@ -120,7 +123,6 @@ class Router
 
         return $url;
     }
-
 
     protected function getNamespace()
     {

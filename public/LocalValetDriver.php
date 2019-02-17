@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * ValetDriver to rewrite base url
+ * User: Alexander Korus
+ * Date: 2019-02-16
+ */
+
 class LocalValetDriver extends ValetDriver
 {
     /**
