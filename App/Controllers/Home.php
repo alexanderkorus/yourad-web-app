@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Post;
 use \Core\View;
 
 /**
@@ -27,7 +28,9 @@ class Home extends \Core\Controller
 
     public function indexAction()
     {
+        $posts = Post::findAll();
 
-        View::renderTemplate('Home/index.html');
+        //var_dump($posts);
+        View::renderTemplate('Home/index.html', ['posts' => $posts]);
     }
 }

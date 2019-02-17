@@ -66,7 +66,7 @@ class LocalValetDriver extends ValetDriver
             // die($sitePath.'/api/index.php'.$uri);
             //return $sitePath.'/api/index.php'.$uri;
             //return $sitePath.'/api/index.php' . '?' . $_SERVER['QUERY_STRING'];
-            $_SERVER['QUERY_STRING'] = substr($uri, 1);;
+            $_SERVER['QUERY_STRING'] = substr($uri, 1);
             return $sitePath.'/index.php';
         }
 
