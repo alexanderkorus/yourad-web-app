@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use \Core\View;
 
@@ -29,8 +30,9 @@ class Home extends \Core\Controller
     public function indexAction()
     {
         $posts = Post::findAll();
+        $categories = Category::findAll();
 
         //var_dump($posts);
-        View::renderTemplate('Home/index.html', ['posts' => $posts]);
+        View::renderTemplate('Home/index.html', ['posts' => $posts, 'categories' => $categories]);
     }
 }

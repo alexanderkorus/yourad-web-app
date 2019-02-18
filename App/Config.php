@@ -19,4 +19,6 @@ class Config
     const DB_PASSWORD = 'test1234';
 
     const SHOW_ERRORS = true;
+
+    const URL = 'https://yourad.test';
 }
