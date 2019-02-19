@@ -21,4 +21,7 @@ class Config
     const SHOW_ERRORS = true;
 
     const URL = 'https://yourad.test';
+
+    const HASH_KEY = 'sdifjisd8923hnwiohfdosu82jnsdgs';
+
 }

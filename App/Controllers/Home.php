@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Core\Session;
 use \Core\View;
 
 /**
@@ -19,6 +20,7 @@ class Home extends \Core\Controller
     protected function before()
     {
        // placeholder for before handling
+        Session::init();
     }
 
 

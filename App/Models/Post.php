@@ -26,7 +26,7 @@ class Post extends \Core\Model
     public $user;
 
 
-    public static function findAll()
+    public static function findAll(): ?array
     {
 
         try {
@@ -38,7 +38,6 @@ class Post extends \Core\Model
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
             $results = $stmt->fetchAll();
-
 
             return $results;
             

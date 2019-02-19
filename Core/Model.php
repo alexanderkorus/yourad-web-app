@@ -2,29 +2,25 @@
 
 namespace Core;
 
-use PDO;
-use App\Config;
-
 /**
  * Base model
  * User: Alexander Korus
  * Date: 2019-02-17
  */
-abstract class Model
+class Model
 {
 
-    protected static function getDB()
-    {
-        static $db = null;
+    protected $db;
 
-        if ($db === null) {
-            $dsn = 'mysql:host=' . Config::DB_HOST . ';dbname=' . Config::DB_NAME . ';charset=utf8';
-            $db = new PDO($dsn, Config::DB_USER, Config::DB_PASSWORD);
+    function __construct() {
 
-            // Throw an Exception when an error occurs
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
+        // Erzeugt ein Datenbankobjekt für das Model
+        $this->db = new Database();
 
-        return $db;
     }
+
+    protected static function getDB() {
+        return DBConnection::getConnection();
+    }
+
 }

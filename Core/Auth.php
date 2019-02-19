@@ -9,6 +9,7 @@
 namespace Core;
 
 use App\Config;
+use App\Models\User;
 
 class Auth
 {
@@ -25,11 +26,11 @@ class Auth
         }
     }
 
-    public static function startSession($user) {
+    public static function startSession(User $user) {
 
         Session::init();
         Session::set('isLoggedIn', true);
-        Session::set('userId', $user->userid);
+        Session::set('userId', $user->id);
         Session::set('username', $user->username);
         Session::set('email', $user->email);
 
