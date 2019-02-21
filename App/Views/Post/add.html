@@ -13,12 +13,19 @@
     </div>
 </div>
 <!-- //breadcrumbs -->
+{% if message %}
+    <div class="alert alert-primary" role="alert">
+        {{ message }}
+    </div>
+{% endif %}
+
+
 <!-- Submit Ad -->
 <div class="submit-ad main-grid-border">
     <div class="container">
         <h2 class="w3-head">Eine Anzeige aufgeben</h2>
         <div class="post-ad-form">
-            <form>
+            <form action="/post/add" METHOD="POST" enctype="multipart/form-data">
                 <label>Select Category <span>*</span></label>
                 <select name="category" class="">
                     {% for cat in categories %}
@@ -27,32 +34,44 @@
                 </select>
                 <div class="clearfix"></div>
                 <label>Titel <span>*</span></label>
-                <input name="title" type="text" class="phone" placeholder="">
+                <input name="title" type="text" class="phone" placeholder="" required>
                 <div class="clearfix"></div>
                 <label>Beschreibung <span>*</span></label>
-                <textarea name="description" class="mess" placeholder="Schreibe etwas über deine Anzeige"></textarea>
+                <textarea name="description" class="mess" placeholder="Schreibe etwas über deine Anzeige" required></textarea>
                 <div class="clearfix"></div>
                 <label>Preis <span>*</span></label>
-                <input name="price" type="text" class="phone" placeholder="">
+                <input name="price" type="text" class="phone" placeholder="" required>
+                <div class="clearfix"></div>
+                <label>Preis Basis <span>*</span></label>
+                <fieldset required>
+                    <div class="clearfix"></div>
 
+                    <label for="fixed"> Fixpreis</label>
+                    <input type="radio" id="fixed" name="pricingbase" value="fixed" checked>
+                    <div class="clearfix"></div>
+                    <input type="radio" id="negotiable" name="pricingbase" value="negotiable">
+                    <label for="negotiable"> Verhandelbar</label>
+                    <div class="clearfix"></div>
+                    <input type="radio" id="free" name="pricingbase" value="free">
+                    <label for="free"> Zu verschenken</label>
+
+                </fieldset>
                 <div class="clearfix"></div>
                 <div class="upload-ad-photos">
                     <label>Fotos deiner Anzeige:</label>
                     <div class="photos-upload-view">
-                        <form id="upload" action="/post/add" method="POST" enctype="multipart/form-data">
 
                             <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000"/>
 
                             <div>
-                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple"/>
+                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" accept="image/*" required/>
                                 <div id="filedrag">oder ziehe deine Bilder hier rein</div>
                             </div>
 
                             <div id="submitbutton">
-                                <button type="submit">Upload Files</button>
+                                <button type="submit">Upload Images</button>
                             </div>
 
-                        </form>
 
                         <div id="messages">
                             <p</p>
@@ -73,5 +92,8 @@
 
 {% endblock %}
 {% block script %}
+
+
+
 
 {% endblock %}

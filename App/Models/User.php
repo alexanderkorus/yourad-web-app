@@ -108,4 +108,38 @@ class User extends \Core\Model
         return $rc;
     }
 
+    public static function find(int $id): ?User {
+
+        $db = static::getDB();
+
+        $stmt = $db->prepare('select * from user where id = :id');
+        $stmt->execute(array(
+            ':id' => $id
+        ));
+
+        if ($stmt->rowCount() > 0) {
+
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'User');
+            $result = $stmt->fetch();
+
+            $user = new User();
+            $user->id = $result['id'];
+            $user->first_name = $result['first_name'];
+            $user->last_name = $result['last_name'];
+            $user->username = $result['username'];
+            $user->email = $result['email'];
+            $user->mobile_number = $result['mobile_number'];
+            $user->street = $result['street'];
+            $user->plz = $result['plz'];
+            $user->country = $result['country'];
+            $user->city = $result['city'];
+
+            return $user;
+
+        } else {
+            return null;
+        }
+
+    }
+
 }

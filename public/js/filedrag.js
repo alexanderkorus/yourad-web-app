@@ -49,7 +49,8 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 		Output(
 			"<p>File information: <strong>" + file.name +
 			"</strong> type: <strong>" + file.type +
-			"</strong> size: <strong>" + file.size +
+			"</strong> hehe: <strong>" + file.size +
+			"</strong> path: <strong>" + file.path +
 			"</strong> bytes</p>"
 		);
 
@@ -77,7 +78,6 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 			filedrag.style.display = "block";
 
 			// remove submit button
-			submitbutton.style.display = "none";
 		}
 
 	}

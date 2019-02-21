@@ -29,7 +29,8 @@ $router->add('category', ['controller' => 'Category', 'action' => 'index']);
 $router->add('category/{id:\d+}', ['controller' => 'Category', 'action' => 'index']);
 $router->add('category/{id:\d+}/search', ['controller' => 'Category', 'action' => 'search']);
 $router->add('post/search', ['controller' => 'Post', 'action' => 'search']);
-
+$router->add('post/add', ['controller' => 'Post', 'action' => 'addPost']);
+$router->add('post/{id:\d+}', ['controller' => 'Post', 'action' => 'index']);
 
 
 /*
