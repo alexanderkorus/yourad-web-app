@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>YourAd - Die Kleinanzeigen-Plattform deiner Wahl!</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"><!-- bootstrap-CSS -->
-    <link rel="stylesheet" href="css/bootstrap-select.css"><!-- bootstrap-select-CSS -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- style.css -->
-    <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" /><!-- flexslider-CSS -->
-    <link rel="stylesheet" href="css/font-awesome.min.css" /><!-- fontawesome-CSS -->
-    <link rel="stylesheet" href="css/menu_sideslide.css" type="text/css" media="all"><!-- Navigation-CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"><!-- bootstrap-CSS -->
+    <link rel="stylesheet" href="/css/bootstrap-select.css"><!-- bootstrap-select-CSS -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" /><!-- style.css -->
+    <link rel="stylesheet" href="/css/flexslider.css" type="text/css" media="screen" /><!-- flexslider-CSS -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css" /><!-- fontawesome-CSS -->
+    <link rel="stylesheet" href="/css/menu_sideslide.css" type="text/css" media="all"><!-- Navigation-CSS -->
     <!-- meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,6 +18,8 @@
     <link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
     <!--//fonts-->
+    {% block head %}
+    {% endblock %}
 </head>
 <body>
 
@@ -49,15 +51,15 @@
                 <h1><a href="/"><span>Your</span>Ad</a></h1>
             </div>
             <div class="agileits_search">
-                <form action="#" method="post">
-                    <input name="Search" type="text" placeholder="Was suchst du?" required="" />
+                <form action="/post/search" method="post">
+                    <input name="searchText" type="text" placeholder="Was suchst du?" required="" />
 
                     <button type="submit" class="btn btn-default" aria-label="Left Align">
                         <i class="fa fa-search" aria-hidden="true"> </i>
                     </button>
 
                 </form>
-                <a class="post-w3layouts-ad" href="post-ad.html">Neue Anzeige</a>
+                <a class="post-w3layouts-ad" href="/newpost">Neue Anzeige</a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -126,15 +128,15 @@
 </footer>
 <!--footer section end-->
 <!-- Navigation-Js-->
-<script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/classie.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/classie.js"></script>
 <!-- //Navigation-Js-->
 <!-- js -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
 <!-- js -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/bootstrap.js"></script>
-<script src="js/bootstrap-select.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap-select.js"></script>
 <script>
     $(document).ready(function () {
         var mySelect = $('#first-disabled2');
@@ -156,17 +158,17 @@
     });
 </script>
 <!-- language-select -->
-<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
-<link href="css/jquery.uls.css" rel="stylesheet"/>
-<link href="css/jquery.uls.grid.css" rel="stylesheet"/>
-<link href="css/jquery.uls.lcd.css" rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery.leanModal.min.js"></script>
+<link href="/css/jquery.uls.css" rel="stylesheet"/>
+<link href="/css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="/css/jquery.uls.lcd.css" rel="stylesheet"/>
 <!-- Source -->
-<script src="js/jquery.uls.data.js"></script>
-<script src="js/jquery.uls.data.utils.js"></script>
-<script src="js/jquery.uls.lcd.js"></script>
-<script src="js/jquery.uls.languagefilter.js"></script>
-<script src="js/jquery.uls.regionfilter.js"></script>
-<script src="js/jquery.uls.core.js"></script>
+<script src="/js/jquery.uls.data.js"></script>
+<script src="/js/jquery.uls.data.utils.js"></script>
+<script src="/js/jquery.uls.lcd.js"></script>
+<script src="/js/jquery.uls.languagefilter.js"></script>
+<script src="/js/jquery.uls.regionfilter.js"></script>
+<script src="/js/jquery.uls.core.js"></script>
 <script>
     $( document ).ready( function() {
         $( '.uls-trigger' ).uls( {
@@ -179,7 +181,7 @@
     } );
 </script>
 <!-- //language-select -->
-<script type="text/javascript" src="js/jquery.flexisel.js"></script><!-- flexisel-js -->
+<script type="text/javascript" src="/js/jquery.flexisel.js"></script><!-- flexisel-js -->
 <script type="text/javascript">
     $(window).load(function() {
         $("#flexiselDemo3").flexisel({
@@ -208,7 +210,7 @@
     });
 </script>
 <!-- Slider-JavaScript -->
-<script src="js/responsiveslides.min.js"></script>
+<script src="/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -240,8 +242,8 @@
     });
 </script>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript" src="/js/move-top.js"></script>
+<script type="text/javascript" src="/js/easing.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".scroll").click(function(event){

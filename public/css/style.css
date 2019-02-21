@@ -2704,6 +2704,15 @@ ul.all-cat-list li a {
     color: #ff4c4c;
 	text-decoration:none;
 }
+
+ul.all-cat-list li a b {
+    font-size: 14px;
+    color: #ff4c4c;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+
 ul.all-cat-list li a:hover {
 	color:#000;
 }
@@ -4155,7 +4164,7 @@ ul.privacy-start {
 }
 /*-- //breadcrumb --*/
 
-/*-- Post ad --*/
+/*-- Category ad --*/
 .post-ad-form {
     border: 1px solid #eee;
     padding: 40px;
@@ -4334,6 +4343,13 @@ pre
     padding: 20px 0;
     margin: 20px 0;
 }
+
+.add-post-button {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
 .personal-details label {
     font-size: 15px;
     text-transform: capitalize;
@@ -4356,7 +4372,7 @@ p.post-terms {
 p.post-terms a {
     color: #ff4c4c;
 }
-/*-- //Post ad --*/
+/*-- //Category ad --*/
 footer.diff {
     margin-bottom: 40px;
 }

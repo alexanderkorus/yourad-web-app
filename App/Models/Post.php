@@ -5,7 +5,7 @@ namespace App\Models;
 use PDO;
 
 /**
- * Post model
+ * Category model
  * User: Alexander Korus
  * Date: 2019-02-17
  */
@@ -24,10 +24,10 @@ class Post extends \Core\Model
     public $price;
     public $category;
     public $user;
+    public $images;
 
 
-    public static function findAll(): ?array
-    {
+    public static function findAll(): ?array {
 
         try {
             $db = static::getDB();
@@ -39,6 +39,8 @@ class Post extends \Core\Model
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
             $results = $stmt->fetchAll();
 
+
+
             return $results;
             
         } catch (PDOException $e) {
@@ -46,4 +48,76 @@ class Post extends \Core\Model
         }
     }
 
+    public static function findByCategory(int $id) {
+
+        try {
+            $db = static::getDB();
+
+            $stmt = $db->prepare('select * from post where category_id = :id');
+            $stmt->execute(array(
+                ":id" => $id
+            ));
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
+            $results = $stmt->fetchAll();
+
+            foreach ($results as $key => $field) {
+                $results[$key]["images"] = Image::findByPost($field["id"]);
+            }
+
+            return $results;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
+    public static function findByTitleInCategory(string $searchText, int $categoryId) {
+
+        try {
+            $db = static::getDB();
+
+            $stmt = $db->prepare('select * from post where category_id = :id and title like :text');
+            $stmt->execute(array(
+                ":id" => $categoryId,
+                ":text" => "%". $searchText . "%"
+            ));
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
+            $results = $stmt->fetchAll();
+
+            foreach ($results as $key => $field) {
+                $results[$key]["images"] = Image::findByPost($field["id"]);
+            }
+
+            return $results;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
+
+    public static function findByTitle(string $searchText) {
+
+        try {
+            $db = static::getDB();
+
+            $stmt = $db->prepare('select * from post where title like :text');
+            $stmt->execute(array(
+                ":text" => "%" . $searchText . "%"
+            ));
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
+            $results = $stmt->fetchAll();
+
+            foreach ($results as $key => $field) {
+                $results[$key]["images"] = Image::findByPost($field["id"]);
+            }
+
+            return $results;
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
 }

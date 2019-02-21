@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
-
 {% block body %}
 
     <div class="slider">
@@ -27,10 +25,10 @@
 
                     <div class="col-md-3">
                         <div class="focus-grid w3layouts-boder{{ category.border }}">
-                            <a class="btn-8" href="/categories/{{ category.id }}">
+                            <a class="btn-8" href="/category/{{ category.id }}">
                                 <div class="focus-border">
                                     <div class="focus-layout">
-                                        <div class="focus-image"><i class='{{ category.icon }}'></i></div>
+                                        <div class="focus-image "><i class='{{ category.icon }}'></i></div>
                                         <h4 class="clrchg">{{ category.name }}</h4>
                                     </div>
                                 </div>

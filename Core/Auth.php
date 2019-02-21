@@ -14,9 +14,8 @@ use App\Models\User;
 class Auth
 {
 
-    public static function handleLogin()
+    public static function handleAuth()
     {
-        @session_start();
         $isLoggedIn = $_SESSION['isLoggedIn'];
         if ($isLoggedIn == false)
         {
