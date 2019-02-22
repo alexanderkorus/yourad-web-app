@@ -20,12 +20,6 @@ class Post extends \Core\Controller
     protected function before() {
         // placeholder for before handling
         Session::init();
-
-    }
-
-
-    protected function after() {
-        // placeholder for after handling
     }
 
     /*
@@ -60,7 +54,6 @@ class Post extends \Core\Controller
 
         $postId = $this->route_params['id'];
         $post = App\Models\Post::findById($postId);
-
         if (!is_null($post)) {
             View::renderTemplate('Post/index.html', array(
                 "post" => $post
@@ -78,9 +71,6 @@ class Post extends \Core\Controller
 
     // Create new Category
     public function addPostAction() {
-
-        var_dump($_POST);
-        var_dump($_FILES);
 
         // First add Post
         Auth::handleAuth();
@@ -156,7 +146,7 @@ class Post extends \Core\Controller
             }
 
         } else {
-            $statusMsg = 'Please select a file to upload.';
+            $statusMsg = 'Bitte wähle ein Bild für den Upload aus!';
         }
 
         return $statusMsg;

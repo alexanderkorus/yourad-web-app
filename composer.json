@@ -1,6 +1,8 @@
 {
     "require": {
-        "twig/twig": "~1.0"
+        "twig/twig": "~1.0",
+        "ext-gmagick": "*",
+        "ext-gd": "*"
     },
     "autoload": {
         "psr-4": {

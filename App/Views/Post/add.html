@@ -26,7 +26,7 @@
         <h2 class="w3-head">Eine Anzeige aufgeben</h2>
         <div class="post-ad-form">
             <form action="/post/add" METHOD="POST" enctype="multipart/form-data">
-                <label>Select Category <span>*</span></label>
+                <label>Wähle eine Kategorie <span>*</span></label>
                 <select name="category" class="">
                     {% for cat in categories %}
                         <option value="{{ cat.id }}">{{ cat.name }}</option>
@@ -64,7 +64,7 @@
                             <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000"/>
 
                             <div>
-                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" accept="image/*" required/>
+                                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" accept="image/jpeg" required/>
                                 <div id="filedrag">oder ziehe deine Bilder hier rein</div>
                             </div>
 
