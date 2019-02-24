@@ -11,7 +11,7 @@ namespace Core;
 
 class Hash
 {
-
+    // Erzeugt einen Hash aus den übergebenen Daten
     public static function create($algo, $data, $salt)
     {
         $context = hash_init($algo, HASH_HMAC, $salt);

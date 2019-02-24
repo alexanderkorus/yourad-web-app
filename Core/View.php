@@ -10,21 +10,9 @@ namespace Core;
 class View
 {
 
-
-    public static function render($view, $args = [])
-    {
-        extract($args, EXTR_SKIP);
-
-        $file = "../App/Views/$view";  // relative to Core directory
-
-        if (is_readable($file)) {
-            require $file;
-        } else {
-            throw new \Exception("$file not found");
-        }
-    }
-
-
+    /*
+     * Rendert ein Twig Templatte und gibt Arguemente mit
+     */
     public static function renderTemplate($template, $args = [])
     {
         static $twig = null;

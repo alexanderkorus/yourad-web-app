@@ -21,13 +21,14 @@ class Database
         $this->pdo = DBConnection::getConnection();
     }
 
-
+    // Getter für die PDO Instanz
     public function pdo() {
 
         return $this->pdo;
 
     }
 
+    // Selektiert in der Datenbank Daten mit dem übergebenen SQL und gibt diese als Array zurück
     public function select($sql, $array = array(), $fetchMode = PDO::FETCH_ASSOC)
     {
 
@@ -42,6 +43,7 @@ class Database
         return $sth->fetchAll($fetchMode);
     }
 
+    // Fügt die übergebenen Daten in die entsprechende Tabelle ein
     public function insert($table, $data)
     {
         ksort($data);
@@ -61,6 +63,7 @@ class Database
 
     }
 
+    // Fügt die übergebenen Daten in die entsprechende Tabelle ein und gibt den Returncode mit der erzeugten ID zurück
     public function last_insert_id($table, $data)
     {
         ksort($data);
@@ -83,7 +86,7 @@ class Database
 
     }
 
-
+    // Ändert die übergebenen Daten in einer bestehenden Tabelle
     public function update($table, $data, $where)
     {
         ksort($data);
@@ -103,6 +106,7 @@ class Database
         return $sth->execute();
     }
 
+    // Löscht Daten aus der übergebenen Tabelle anhand der übergebenen WHERE-Clause
     public function delete($table, $where, $limit = 1)
     {
         return $this->pdo->exec("DELETE FROM $table WHERE $where LIMIT $limit");

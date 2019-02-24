@@ -19,7 +19,6 @@ class Post extends \Core\Model
     public $description;
     public $is_seller;
     public $created;
-    public $updated;
     public $pricing_base;
     public $price;
     public $category;
@@ -28,7 +27,7 @@ class Post extends \Core\Model
 
 
     public function __construct($id = null, $user_id = null, $category_id = null, $title = null, $description = null,
-                                $is_seller = null, $created = null, $updated = null, $pricing_base = null, $price = null,
+                                $is_seller = null, $created = null, $pricing_base = null, $price = null,
                                 $category = null,  $user = null, $images = null) {
 
         // Attribute initialisieren
@@ -39,7 +38,6 @@ class Post extends \Core\Model
         $this->description = $description;
         $this->is_seller = $is_seller;
         $this->created = $created;
-        $this->updated = $updated;
         $this->pricing_base = $pricing_base;
         $this->price = $price;
         $this->category = $category;
@@ -50,7 +48,9 @@ class Post extends \Core\Model
 
     }
 
-
+    /*
+     * Sucht nach allen Anzeigen in der Datenbank und gibt diese zurück
+     */
     public static function findAll(): ?array {
 
         try {
@@ -58,7 +58,7 @@ class Post extends \Core\Model
 
             $stmt = $db->prepare('select * from post 
               inner join user on post.user_id = user.id
-              inner join category on POST.category_id = category.id');
+              inner join category on post.category_id = category.id');
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
             $results = $stmt->fetchAll();
@@ -72,6 +72,10 @@ class Post extends \Core\Model
         }
     }
 
+
+    /*
+     * Sucht nach allen Posts mit der übergebenen Kategorie ID und gibt diese zurück
+     */
     public static function findByCategory(int $id) {
 
         try {
@@ -96,6 +100,9 @@ class Post extends \Core\Model
 
     }
 
+    /*
+     * Sucht nach allen Posts mit dem übergebenen Search Text im Title in der entsprechenden Kategorie
+     */
     public static function findByTitleInCategory(string $searchText, int $categoryId) {
 
         try {
@@ -121,6 +128,9 @@ class Post extends \Core\Model
 
     }
 
+    /*
+     * Sucht nach allen Posts mit dem übergebenen Search Text im Title
+     */
     public static function findByTitle(string $searchText) {
 
         try {
@@ -145,7 +155,10 @@ class Post extends \Core\Model
 
     }
 
-
+    /*
+     * Sucht nach allen Posts mit der übergebenen ID
+     * Befülllt die Attribute Images, Category und User mit den entsprechenden Daten zu dem Post
+     */
     public static function findById(int $id): ?Post {
 
 
@@ -169,7 +182,6 @@ class Post extends \Core\Model
             $post->description = $result['description'];
             $post->is_seller = $result['is_seller'];
             $post->created = $result['created'];
-            $post->updated = $result['updated'];
             $post->pricing_base = $result['pricing_base'];
             $post->price = $result['price'];
             $post->images = Image::findByPost($post->id);
@@ -186,6 +198,9 @@ class Post extends \Core\Model
 
     }
 
+    /*
+     * Fügt eine neue Anzeige in der Datenbank hinzu
+     */
     public function add(): bool {
 
         $rc = $this->db->last_insert_id('post', array(

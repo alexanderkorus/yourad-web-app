@@ -19,6 +19,7 @@ class Model
 
     }
 
+    // gibt ein statisches PDO Objekt zurück
     protected static function getDB() {
         return DBConnection::getConnection();
     }

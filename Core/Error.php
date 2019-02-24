@@ -10,15 +10,15 @@ namespace Core;
 class Error
 {
 
-
+    //  wirft eine ErrorMeldung
     public static function errorHandler($level, $message, $file, $line)
     {
-        if (error_reporting() !== 0) {  // to keep the @ operator working
+        if (error_reporting() !== 0) {
             throw new \ErrorException($message, 0, $level, $file, $line);
         }
     }
 
-
+    // Excepetion Handling, ruft entsprechende Seite auf
     public static function exceptionHandler($exception)
     {
         // Code is 404 (not found) or 500 (general error)
@@ -44,14 +44,7 @@ class Error
             $message .= "\nThrown in '" . $exception->getFile() . "' on line " . $exception->getLine();
 
             error_log($message);
-            //echo "<h1>An error occurred</h1>";
-            /*
-            if ($code == 404) {
-                echo "<h1>Page not found</h1>";
-            } else {
-                echo "<h1>An error occurred</h1>";
-            }
-            */
+
             View::renderTemplate("$code.html");
         }
     }

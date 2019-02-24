@@ -19,32 +19,48 @@ use \Core\View;
 class Authentication extends \Core\Controller
 {
 
+    /*
+     * Session initialisieren
+     */
     protected function before()
     {
-        // placeholder for before handling
         Session::init();
     }
 
 
-    protected function after()
-    {
-        // placeholder for after handling
-    }
+    /*********************
+     * GET Actions
+     *********************/
 
+    /*
+     * Zeigt Login Page
+     */
     public function signInAction()
     {
         View::renderTemplate('Authentication/signin.html');
     }
 
+    /*
+     * Zeigt Registrierungs Page
+     */
     public function signUpAction()
     {
         View::renderTemplate('Authentication/signup.html');
     }
 
+
+    /*********************
+     * POST Actions
+     *********************/
+
+    /*
+     *  Sucht den Nutzer mit dem übergebenen Passwort und startet die Session
+     */
     public function loginAction()
     {
 
-        $user = User::login($_POST['credential'], Hash::create('sha256', $_POST['password'], Config::HASH_KEY));
+        $user = User::login($_POST['credential'], Hash::create('sha256', $_POST['password'],
+            Config::HASH_KEY));
 
         if (!is_null($user)) {
             Auth::startSession($user);
@@ -55,6 +71,10 @@ class Authentication extends \Core\Controller
 
     }
 
+    /*
+     * Registriert einen Benutzen mit den übergebenen Daten, prüft ob dieser schon vorhanden ist und gibt eine Message
+     * aus
+     */
     public function registerAction()
     {
 
@@ -79,7 +99,9 @@ class Authentication extends \Core\Controller
 
     }
 
-
+    /*
+     * Loggt einen Nutzer aus und beendet die Session
+     */
     public function logoutAction()
     {
         Session::destroy();

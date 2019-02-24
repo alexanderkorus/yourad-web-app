@@ -22,25 +22,24 @@ class Post extends \Core\Controller
         Session::init();
     }
 
-    /*
+    /*********************
      * GET Actions
-     */
+     *********************/
 
-    // Show new Category page
+    /*
+     * Überprüft ob der Nutzer angzeigt wird und rendert entweder das Hinzufügen von Inseraten oder die Login Page
+     */
     public function newPostAction() {
 
-        if (isset($_SESSION['isLoggedIn'])) {
-            if ($_SESSION['isLoggedIn'] == true) {
-                // Show new Category Page
-                $categories = Category::findAll();
+        if (Session::get('isLoggedIn') == true) {
 
-                View::renderTemplate('Post/add.html', array(
-                    "categories" => $categories
-                ));
-            } else {
-                // Show Login Page
-                View::renderTemplate('Authentication/signin.html');
-            }
+            // Show new Category Page
+            $categories = Category::findAll();
+
+            View::renderTemplate('Post/add.html', array(
+                "categories" => $categories
+            ));
+
         } else {
             // Show Login Page
             View::renderTemplate('Authentication/signin.html');
@@ -49,7 +48,9 @@ class Post extends \Core\Controller
     }
 
 
-    // Show page of a single post
+    /*
+     * Zeigt die Seite eines bestimmten Inserats
+     */
     public function indexAction() {
 
         $postId = $this->route_params['id'];
@@ -65,18 +66,19 @@ class Post extends \Core\Controller
     }
 
 
-    /*
+    /*********************
      * POST Actions
-     */
+     *********************/
 
-    // Create new Category
+    /*
+     * Erstellt eine neue Anzeige
+     */
     public function addPostAction() {
 
-        // First add Post
         Auth::handleAuth();
 
-        $post = new App\Models\Post(null, $_SESSION['userId'], $_POST['category'], $_POST['title'],
-            $_POST['description'], true, null, null, $_POST['pricingbase'], $_POST['price'],
+        $post = new App\Models\Post(null, Session::get('userId'), $_POST['category'], $_POST['title'],
+            $_POST['description'], true, null, $_POST['pricingbase'], $_POST['price'],
             null, null, null);
 
         if ($post->add()) {
@@ -87,10 +89,6 @@ class Post extends \Core\Controller
             $statusMessage = "Es ist ein Fehler beim Hinzufügen deines Posts aufgetreten. Versuche es nocheinmal";
         }
 
-
-
-
-        // Display status message
         $categories = Category::findAll();
 
         View::renderTemplate('Post/add.html', array(
@@ -101,7 +99,9 @@ class Post extends \Core\Controller
 
     }
 
-    // Upload Images
+    /*
+     * Lädt Bilder auf den Server und speichert die Pfade in der Datenbank zu dem entsprechenden Post
+     */
     private function uploadImages($postId) {
 
         $targetDir = "uploads/";
@@ -153,7 +153,9 @@ class Post extends \Core\Controller
 
     }
 
-    // Search for a post
+    /*
+     * Zeigt eine Seite mit allen Inseraten die zu dem übergebenen Suchstring passen
+     */
     public function searchAction() {
 
         $searchText = $_POST['searchText'];

@@ -45,16 +45,18 @@ class User extends \Core\Model
     }
 
 
-
+    /*
+     * Sucht in der Datenbank nach dem User mit den übergeben Daten und gibt diesen zurück
+     */
     public static function login(string $credential, string $password): ?User {
 
         try {
             $db = static::getDB();
-            var_dump($password);
-            $stmt = $db->prepare('select id, username, email from user where email = :email and password = :password');
+            $stmt = $db->prepare('select id, username, email from user where (email = :credential or username = :credential) 
+                                            and password = :password');
 
             $stmt->execute(array(
-                ':email' => $credential,
+                ':credential' => $credential,
                 ':password' => $password
             ));
 
@@ -76,7 +78,9 @@ class User extends \Core\Model
 
     }
 
-
+    /*
+     * Überprüft ob ein User mit der Email oder dem Usernamen schon existiert
+     */
     public function areCredentialsAvailable(): bool {
 
         $data = $this->db->select('select username from user where username = :username or email = :email',
@@ -90,6 +94,9 @@ class User extends \Core\Model
 
     }
 
+    /*
+     * Fügt einen neuen User in die Datenbank ein
+     */
     public function add(string $password): bool {
 
         $rc = $this->db->insert('user', array(
@@ -108,6 +115,9 @@ class User extends \Core\Model
         return $rc;
     }
 
+    /*
+     * Sucht nach einem Nutzer mit der übergebenen ID und gibt ihn zurück
+     */
     public static function find(int $id): ?User {
 
         $db = static::getDB();

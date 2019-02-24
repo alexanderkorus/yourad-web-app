@@ -21,54 +21,74 @@ use \Core\View;
 class Category extends \Core\Controller
 {
 
-
+    /*
+     * Session initialisieren
+     */
     protected function before()
     {
-        // placeholder for before handling
         Session::init();
     }
 
+    /*********************
+     * GET Actions
+     *********************/
+
+    /*
+     * Zeigt entweder eine Seite mit allen inseraten oder der entpsrechenden Kateogrie
+     */
     public function indexAction()
     {
 
-        // Save route param to categoryId
+        // überprüfe ob die Seite mit einer ID aufgerufen wurde
         if (isset($this->route_params['id'])) {
 
             $categoryId = $this->route_params['id'];
-
-            // Get categories, choosen category and corresponding posts
-            $categories = \App\Models\Category::findAll();
             $category = \App\Models\Category::find($categoryId);
             $posts = \App\Models\Post::findByCategory($categoryId);
 
-            View::renderTemplate('Category/index.html', array(
-                "categories" => $categories,
-                "category" => $category,
-                "posts" => $posts
-            ));
+            $this->renderCategoryPage($posts, $category);
+
         } else {
-            $categories = \App\Models\Category::findAll();
+
             $posts = \App\Models\Post::findAll();
             $category = new \App\Models\Category();
             $category->name = "Alle";
 
-            View::renderTemplate('Category/index.html', array(
-                "categories" => $categories,
-                "category" => $category,
-                "posts" => $posts
-            ));
+            $this->renderCategoryPage($posts, $category);
+
         }
     }
 
+    /*********************
+     * POST Actions
+     *********************/
+
+    /*
+     * Sucht Anzeigen in einer bestimmten Kategorie
+     */
     public function searchAction() {
 
         $categoryId = $this->route_params['id'];
         $searchText = $_POST['searchText'];
 
         // Get categories, choosen category and corresponding posts
-        $categories = \App\Models\Category::findAll();
         $category = \App\Models\Category::find($categoryId);
         $posts = \App\Models\Post::findByTitleInCategory($searchText, $categoryId);
+
+        $this->renderCategoryPage($posts, $category);
+
+    }
+
+    /*********************
+     * Private Methods
+     *********************/
+
+    /*
+     * Lädt alle Kategorien und rendert die Kategorie mit den übergebenen Daten
+     */
+    private function renderCategoryPage($posts, $category) {
+
+        $categories = \App\Models\Category::findAll();
 
         View::renderTemplate('Category/index.html', array(
             "categories" => $categories,
@@ -77,7 +97,5 @@ class Category extends \Core\Controller
         ));
 
     }
-
-
 
 }

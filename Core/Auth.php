@@ -14,6 +14,9 @@ use App\Models\User;
 class Auth
 {
 
+    /*
+     * Überprüft ob der User eingeloggt ist, wenn nicht erfolgt eine Weiterleitung auf die Startseite
+     */
     public static function handleAuth()
     {
         $isLoggedIn = $_SESSION['isLoggedIn'];
@@ -25,6 +28,9 @@ class Auth
         }
     }
 
+    /*
+     * Startet die Session und setzt die entsprechenden Attribute aus dem übergeben User
+     */
     public static function startSession(User $user) {
 
         Session::init();

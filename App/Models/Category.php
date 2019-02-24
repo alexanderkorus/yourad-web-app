@@ -19,7 +19,10 @@ class Category extends \Core\Model
     public $border;
     public $numberOfAds;
 
-
+    /*
+     * Sucht nach allen Kategorien und gibt diese zurück
+     * Zählt die Anzahl der Anzeigen in einer Kategorie und gibt diese als numberOfAds zurück
+     */
     public static function findAll()
     {
 
@@ -39,6 +42,9 @@ class Category extends \Core\Model
         }
     }
 
+    /*
+     * findet ein Kategorie mit der übergebenen ID
+     */
     public static function find(int $id): ?Category {
 
         $db = static::getDB();

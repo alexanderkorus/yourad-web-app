@@ -84,7 +84,7 @@ class Image extends \Core\Model
 
         $image = new Gmagick('uploads/' . $source);
 
-        $image->thumbnailimage($width, $height);
+        $image->cropthumbnailimage($width, $height);
 
         $image->write('uploads/' . $target . '_' . $source);
 
@@ -92,6 +92,10 @@ class Image extends \Core\Model
     }
 
 
+    /**
+     * @param $source
+     * @return mixed
+     */
     private function addWatermark($source)
     {
 
@@ -103,13 +107,10 @@ class Image extends \Core\Model
         $sx = imagesx($stamp);
         $sy = imagesy($stamp);
 
-        imagecopy($image, $stamp, imagesx($image) - $sx - $marge_right, imagesy($image) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+        imagecopy($image, $stamp, imagesx($image) - $sx - $marge_right,
+            imagesy($image) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
         ob_start();
-            // output jpeg (or any other chosen) format & quality
             imagepng($image, 'uploads/' . $source);
-            // capture output to string
-            $contents = ob_get_contents();
-        // end capture
         ob_end_clean();
 
         // be tidy; free up memory

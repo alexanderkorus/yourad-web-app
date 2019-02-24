@@ -16,25 +16,37 @@ use \Core\View;
 class Home extends \Core\Controller
 {
 
-
+    /*
+     * Session initialisieren
+     */
     protected function before()
     {
        // placeholder for before handling
         Session::init();
     }
 
-
-    protected function after()
-    {
-        // placeholder for after handling
-    }
-
+    /*
+     * Zeigt die Startseite
+     */
     public function indexAction()
     {
-        $posts = Post::findAll();
         $categories = Category::findAll();
+        View::renderTemplate('Home/index.html', ['categories' => $categories]);
+    }
 
-        //var_dump($posts);
-        View::renderTemplate('Home/index.html', ['posts' => $posts, 'categories' => $categories]);
+    /*
+     * Zeigt die Impressumsseite (View ist nur in Online-Version verfügbar und wird ist nicht in der Verisonsverwaltung
+     * vorhanden)
+     */
+    public function imprintAction() {
+        View::renderTemplate('imprint.html');
+    }
+
+    /*
+     * Datenschutzerklärung anzeigen (View ist nur in Online-Version verfügbar und wird ist nicht in der Verisonsverwaltung
+     * vorhanden)
+     */
+    public function dataPolicyAction() {
+        View::renderTemplate('policy.html');
     }
 }
