@@ -19,6 +19,8 @@ A classifieds platform to investigate the possibilities of image editing with PH
 
 > git clone https://github.com/alexanderkorus/yourad-web-app.git
 
+> composer install
+
 ### Install Apache & MySQL & PHP 7 (XAMPP)
 
  * Download XAMPP and start Apache Server and MySQL Database

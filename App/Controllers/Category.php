@@ -53,7 +53,6 @@ class Category extends \Core\Controller
             $posts = \App\Models\Post::findAll();
             $category = new \App\Models\Category();
             $category->name = "Alle";
-
             $this->renderCategoryPage($posts, $category);
 
         }

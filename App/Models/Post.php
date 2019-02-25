@@ -56,14 +56,14 @@ class Post extends \Core\Model
         try {
             $db = static::getDB();
 
-            $stmt = $db->prepare('select * from post 
-              inner join user on post.user_id = user.id
-              inner join category on post.category_id = category.id');
+            $stmt = $db->prepare('select * from post');
             $stmt->execute();
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
             $results = $stmt->fetchAll();
-
-
+            foreach ($results as $key => $field) {
+                var_dump($field['id']);
+                $results[$key]["images"] = Image::findByPost($field["id"]);
+            }
 
             return $results;
             
