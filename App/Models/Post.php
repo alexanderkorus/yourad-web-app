@@ -61,7 +61,6 @@ class Post extends \Core\Model
             $stmt->setFetchMode(PDO::FETCH_CLASS, 'Post');
             $results = $stmt->fetchAll();
             foreach ($results as $key => $field) {
-                var_dump($field['id']);
                 $results[$key]["images"] = Image::findByPost($field["id"]);
             }
 
