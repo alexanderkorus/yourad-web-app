@@ -11,7 +11,7 @@ class View
 {
 
     /*
-     * Rendert ein Twig Templatte und gibt Arguemente mit
+     * Rendert ein Twig Templatte und gibt Arguemente mit.
      */
     public static function renderTemplate($template, $args = [])
     {

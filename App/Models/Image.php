@@ -25,9 +25,8 @@ class Image extends \Core\Model
     public $post_id;
 
 
-    /**
-     * @param int $id
-     * @return array
+    /*
+     * Findet alle Bilder zu einer Post ID und gibt sie zurück
      */
     public static function findByPost(int $id)
     {
@@ -52,9 +51,9 @@ class Image extends \Core\Model
 
     }
 
-    /**
-     * @return bool
-     * @throws \GmagickException
+    /*
+     * Fügt ein neues Bild mit Thumbnail zur Datenbank hinzu. Das Bild wird zuvor gecroppded und anschließend wird ein Logo als Wasser
+     * zeichen eingefügt.
      */
     public function add()
     {
@@ -70,13 +69,8 @@ class Image extends \Core\Model
     }
 
 
-    /**
-     * @param string $source
-     * @param $target
-     * @param int $height
-     * @param int $width
-     * @return string
-     * @throws \GmagickException
+    /*
+     * Schneidet ein Ausschnitt von der Mitte des Bildes mit den übergebenen Größenangaben heraus
      */
     private function cropImageFromCenter(string $source, $target, int $height, int $width): string
     {
@@ -92,9 +86,8 @@ class Image extends \Core\Model
     }
 
 
-    /**
-     * @param $source
-     * @return mixed
+    /*
+     * Fügt ein Wasserzeichen auf das Bild der übergebenen Source
      */
     private function addWatermark($source)
     {

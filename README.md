@@ -88,5 +88,5 @@ A classifieds platform to investigate the possibilities of image editing with PH
 
     >  yum install GraphicsMagick-devel
    
-   Then
+   Then retry it to install it again.
 
